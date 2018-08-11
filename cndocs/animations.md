@@ -63,10 +63,10 @@ export default class App extends React.Component {
 
 我们来分解一下这个过程。在`FadeInView`的构造函数里，我们创建了一个名为`fadeAnim`的`Animated.Value`，并放在`state`中。而`View`的透明度是和这个值绑定的。
 
-组件加载时，透明度首先设为 0. Then, an easing animation is started on the `fadeAnim` animated value, which will update all of its dependent mappings (in this case, just the opacity) on each frame as the value animates to the final value of 1.
+组件加载时，透明度首先设为 0.  然后，动画以value的初始值0开始，逐渐过渡（本示例中指透明度的变化），并且每一帧都在0-1之间变化，最终透明度变为1，动画结束。
 
-This is done in an optimized way that is faster than calling `setState` and re-rendering.  
-Because the entire configuration is declarative, we will be able to implement further optimizations that serialize the configuration and runs the animation on a high-priority thread.
+比起调用 'setState'重新渲染，这中方式则更快，并且得到优化。
+原因是这样的全局配置是声明式的，我们以一个较高优先级的线程运行配置内容，从而达到优化。
 
 ### 配置动画
 
